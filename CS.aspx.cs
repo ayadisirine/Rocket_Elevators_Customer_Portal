@@ -17,8 +17,9 @@ public partial class CS : System.Web.UI.Page
         //Check user existence in mysql database as customer 
         //??????
 
-
-
+        var email = txtEmail.Text.Trim();
+        var uri = "https://127.0.0.1:5001/api/Customers/" + email;
+        
 
         string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         using (SqlConnection con = new SqlConnection(constr))

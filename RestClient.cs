@@ -58,7 +58,7 @@ namespace User_Login_CS
 
         public string MakeRequest(string parameters)
         {
-            var request = (HttpWebRequest)WebRequest.Create(EndPoint + parameters);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(EndPoint + parameters);
 
             request.Method = Method.ToString();
             request.ContentLength = 0;
@@ -75,7 +75,8 @@ namespace User_Login_CS
                     writeStream.Write(bytes, 0, bytes.Length);
                 }
             }
-
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            
             using (var response = (HttpWebResponse)request.GetResponse())
             {
                 var responseValue = string.Empty;

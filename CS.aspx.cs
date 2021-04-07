@@ -30,7 +30,7 @@ public partial class CS : System.Web.UI.Page
         //??????
 
         var email = txtEmail.Text.Trim();
-        var uri = "https://127.0.0.1:5001/api/Customers/" + email;
+        var uri = "http://127.0.0.1:5000/api/Customers/" + email;
         var client = new RestClient(uri, HttpVerb.GET);
         var json = client.MakeRequest();
 
@@ -141,6 +141,9 @@ public class RestClient
                 writeStream.Write(bytes, 0, bytes.Length);
             }
         }
+
+        ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
 
         using (var response = (HttpWebResponse)request.GetResponse())
         {
